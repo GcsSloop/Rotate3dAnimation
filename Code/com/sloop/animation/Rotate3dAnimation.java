@@ -4,7 +4,7 @@
  * Copyright: Copyright (c) 2015
  * 
  * @author sloop
- * @date 2015Äê3ÔÂ10ÈÕ ÉÏÎç11:20:10
+ * @date 2015å¹´3æœˆ10æ—¥ ä¸Šåˆ11:20:10
  * @version V1.0
  */
 
@@ -18,38 +18,38 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
 /**
- * 3D·­×ªÌØĞ§
+ * 3Dç¿»è½¬ç‰¹æ•ˆ
  * @ClassName: Rotate3dAnimation
  * @author sloop
- * @date 2015Äê3ÔÂ10ÈÕ ÉÏÎç11:20:10
+ * @date 2015å¹´3æœˆ10æ—¥ ä¸Šåˆ11:20:10
  */
 
 public class Rotate3dAnimation extends Animation {
 
-	// ¿ªÊ¼½Ç¶È
+	// å¼€å§‹è§’åº¦
 	private final float mFromDegrees;
-	// ½áÊø½Ç¶È
+	// ç»“æŸè§’åº¦
 	private final float mToDegrees;
-	// ÖĞĞÄµã
+	// ä¸­å¿ƒç‚¹
 	private final float mCenterX;
 	private final float mCenterY;
-	private final float mDepthZ;	//Éî¶È
-	// ÊÇ·ñĞèÒªÅ¤Çú
+	private final float mDepthZ;	//æ·±åº¦
+	// æ˜¯å¦éœ€è¦æ‰­æ›²
 	private final boolean mReverse;
-	// ÉãÏñÍ·
+	// æ‘„åƒå¤´
 	private Camera mCamera;
 	ContextThemeWrapper context;
-	//ĞÂÔö--ÏñËØ±ÈÀı£¨Ä¬ÈÏÖµÎª1£©
+	//æ–°å¢--åƒç´ æ¯”ä¾‹ï¼ˆé»˜è®¤å€¼ä¸º1ï¼‰
 	float scale = 1;
 
 	/**
-	 * ´´½¨Ò»¸öĞÂµÄÊµÀı Rotate3dAnimation. 
-	 * @param fromDegrees	¿ªÊ¼½Ç¶È
-	 * @param toDegrees		½áÊø½Ç¶È
-	 * @param centerX		ÖĞĞÄµãx×ø±ê
-	 * @param centerY		ÖĞĞÄµãy×ø±ê
-	 * @param depthZ		Éî¶È
-	 * @param reverse		ÊÇ·ñÅ¤Çú
+	 * åˆ›å»ºä¸€ä¸ªæ–°çš„å®ä¾‹ Rotate3dAnimation. 
+	 * @param fromDegrees	å¼€å§‹è§’åº¦
+	 * @param toDegrees		ç»“æŸè§’åº¦
+	 * @param centerX		ä¸­å¿ƒç‚¹xåæ ‡
+	 * @param centerY		ä¸­å¿ƒç‚¹yåæ ‡
+	 * @param depthZ		æ·±åº¦
+	 * @param reverse		æ˜¯å¦æ‰­æ›²
 	 */
 	public Rotate3dAnimation(ContextThemeWrapper context, float fromDegrees, float toDegrees, float centerX, float centerY, float depthZ, boolean reverse) {
 		this.context = context;
@@ -59,7 +59,7 @@ public class Rotate3dAnimation extends Animation {
 		mCenterY = centerY;
 		mDepthZ = depthZ;
 		mReverse = reverse;
-		//»ñÈ¡ÊÖ»úÏñËØ±È £¨¼´dpÓëpxµÄ±ÈÀı£©
+		//è·å–æ‰‹æœºåƒç´ æ¯” ï¼ˆå³dpä¸pxçš„æ¯”ä¾‹ï¼‰
 		scale = context.getResources().getDisplayMetrics().density;
 		Log.e("scale",""+scale);
 	}
@@ -71,11 +71,11 @@ public class Rotate3dAnimation extends Animation {
 		mCamera = new Camera();
 	}
 
-	// Éú³ÉTransformation
+	// ç”ŸæˆTransformation
 	@Override
 	protected void applyTransformation(float interpolatedTime, Transformation t) {
 		final float fromDegrees = mFromDegrees;
-		// Éú³ÉÖĞ¼ä½Ç¶È
+		// ç”Ÿæˆä¸­é—´è§’åº¦
 		float degrees = fromDegrees + ((mToDegrees - fromDegrees) * interpolatedTime);
 
 		
@@ -92,28 +92,28 @@ public class Rotate3dAnimation extends Animation {
 			camera.translate(0.0f, 0.0f, mDepthZ * (1.0f - interpolatedTime));
 		}
 		camera.rotateY(degrees);
-		// È¡µÃ±ä»»ºóµÄ¾ØÕó
+		// å–å¾—å˜æ¢åçš„çŸ©é˜µ
 		camera.getMatrix(matrix);
 		camera.restore();
 
 //----------------------------------------------------------------------------
 		/** 
-		 * ĞŞ¸´´òÁ³ÎÊÌâ		(£ş¦Å(#£ş)¡î¨t¨r(£ş¨Œ£ş///)
-		 * ¼òÒª½éÉÜ£º
-		 * Ô­À´µÄ3D·­×ª»áÓÉÓÚÆÁÄ»ÏñËØÃÜ¶ÈÎÊÌâ¶ø³öÏÖĞ§¹ûÏà²îºÜ´ó
-		 * ÀıÈçÔÚÆÁÄ»ÏñËØ±ÈÎª1,5µÄÊÖ»úÉÏÏÔÊ¾Ğ§¹û»ù±¾Õı³££¬
-		 * ¶øÔÚÏñËØ±È3,0µÄÊÖ»úÉÏÃæ¸Ğ¾õ·­×ª¸Ğ¾õÒª³¬³öÆÁÄ»±ßÔµ£¬
-		 * ÓĞÖÖÓ­Ãæ´òÁ³µÄ¸Ğ¾õ¡¢
+		 * ä¿®å¤æ‰“è„¸é—®é¢˜		(ï¿£Îµ(#ï¿£)â˜†â•°â•®(ï¿£â–½ï¿£///)
+		 * ç®€è¦ä»‹ç»ï¼š
+		 * åŸæ¥çš„3Dç¿»è½¬ä¼šç”±äºå±å¹•åƒç´ å¯†åº¦é—®é¢˜è€Œå‡ºç°æ•ˆæœç›¸å·®å¾ˆå¤§
+		 * ä¾‹å¦‚åœ¨å±å¹•åƒç´ æ¯”ä¸º1,5çš„æ‰‹æœºä¸Šæ˜¾ç¤ºæ•ˆæœåŸºæœ¬æ­£å¸¸ï¼Œ
+		 * è€Œåœ¨åƒç´ æ¯”3,0çš„æ‰‹æœºä¸Šé¢æ„Ÿè§‰ç¿»è½¬æ„Ÿè§‰è¦è¶…å‡ºå±å¹•è¾¹ç¼˜ï¼Œ
+		 * æœ‰ç§è¿é¢æ‰“è„¸çš„æ„Ÿè§‰ã€
 		 * 
-		 * ½â¾ö·½°¸
-		 * ÀûÓÃÆÁÄ»ÏñËØÃÜ¶È¶Ô±ä»»¾ØÕó½øĞĞĞ£Õı£¬
-		 * ±£Ö¤ÁËÔÚËùÓĞÇåÎú¶ÈµÄÊÖ»úÉÏÏÔÊ¾µÄĞ§¹û»ù±¾ÏàÍ¬¡£
+		 * è§£å†³æ–¹æ¡ˆ
+		 * åˆ©ç”¨å±å¹•åƒç´ å¯†åº¦å¯¹å˜æ¢çŸ©é˜µè¿›è¡Œæ ¡æ­£ï¼Œ
+		 * ä¿è¯äº†åœ¨æ‰€æœ‰æ¸…æ™°åº¦çš„æ‰‹æœºä¸Šæ˜¾ç¤ºçš„æ•ˆæœåŸºæœ¬ç›¸åŒã€‚
 		 *  
 		 */
 		float[] mValues = {0,0,0,0,0,0,0,0,0};
-		matrix.getValues(mValues);			//»ñÈ¡ÊıÖµ
-		mValues[6] = mValues[6]/scale;		//ÊıÖµĞŞÕı
-		matrix.setValues(mValues);			//ÖØĞÂ¸³Öµ
+		matrix.getValues(mValues);			//è·å–æ•°å€¼
+		mValues[6] = mValues[6]/scale;		//æ•°å€¼ä¿®æ­£
+		matrix.setValues(mValues);			//é‡æ–°èµ‹å€¼
 		
 //		Log.e("TAG", "mValues["+0+"]="+mValues[0]+"------------\t"+"mValues["+6+"]="+mValues[6]);
 //----------------------------------------------------------------------------
