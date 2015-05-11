@@ -112,7 +112,7 @@ public class Rotate3dAnimation extends Animation {
 		 */
 		float[] mValues = {0,0,0,0,0,0,0,0,0};
 		matrix.getValues(mValues);			//获取数值
-		mValues[6] = mValues[6]/scale;		//数值修正
+		mValues[6] = mValues[6]/scale;			//数值修正
 		matrix.setValues(mValues);			//重新赋值
 		
 //		Log.e("TAG", "mValues["+0+"]="+mValues[0]+"------------\t"+"mValues["+6+"]="+mValues[6]);
