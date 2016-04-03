@@ -1,4 +1,4 @@
-#安卓3D翻转效果  
+# <img src="http://ww4.sinaimg.cn/large/005Xtdi2jw1f2jx68ugicj3074074jrm.jpg" width=36 /> 安卓3D翻转效果  
 
 ## 作者微博：  [@GcsSloop](http://weibo.com/GcsSloop)
 
