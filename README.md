@@ -13,7 +13,7 @@
 
 ## 该文件已经包含在另一个仓库中，你可以[点击这里](https://github.com/GcsSloop/SUtil)查看。
 
-#调用示例：
+# 调用示例：
 ``` java
         // 计算中心点（这里是使用view的中心作为旋转的中心点）
 		final float centerX = view.getWidth() / 2.0f;
